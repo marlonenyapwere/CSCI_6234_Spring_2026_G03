@@ -1,0 +1,14 @@
+@startuml
+left to right direction
+actor "System Administrator" as Admin
+boundary "Extension Console" as Console <<boundary>>
+control "Plugin Manager" as PluginMgr <<control>>
+entity "Step Registry" as Registry <<entity>>
+
+Admin -- Console : 1. Upload new step class
+Console -- PluginMgr : 2. RegisterNewStepType()
+PluginMgr -- PluginMgr : 3. Validate interface
+PluginMgr -- Registry : 4. Update registry entries
+Registry -- Console : 5. Confirm registration
+Console -- Admin : 6. Display "Extension Added"
+@enduml

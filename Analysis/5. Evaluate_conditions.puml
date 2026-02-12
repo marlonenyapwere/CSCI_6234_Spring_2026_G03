@@ -1,0 +1,13 @@
+@startuml
+left to right direction
+actor "Workflow Engine" as Engine
+control "Condition Evaluator" as Evaluator <<control>>
+entity "Transition Rule" as Rule <<entity>>
+entity "Execution Context" as Context <<entity>>
+
+Engine -- Evaluator : 1. Request next path
+Evaluator -- Context : 2. Fetch runtime data values
+Evaluator -- Rule : 3. Retrieve transition expressions
+Evaluator -- Evaluator : 4. Perform logical check
+Evaluator -- Engine : 5. Return NextStep ID
+@enduml

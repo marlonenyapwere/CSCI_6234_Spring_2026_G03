@@ -1,0 +1,15 @@
+@startuml
+left to right direction
+actor "Workflow Designer" as Designer
+boundary "Workflow Design Screen" as UI <<boundary>>
+control "Definition Controller" as Control <<control>>
+entity "Workflow Definition" as Workflow <<entity>>
+entity "Step Definition" as Step <<entity>>
+
+Designer -- UI : 1. Enter workflow details
+UI -- Control : 2. CreateWorkflow()
+Control -- Step : 3. Instantiate steps
+Control -- Workflow : 4. Save workflow structure
+Workflow -- Control : 5. Confirm save
+Control -- UI : 6. Display success
+@enduml

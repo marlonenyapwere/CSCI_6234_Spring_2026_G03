@@ -1,0 +1,13 @@
+@startuml
+left to right direction
+actor "Workflow Engine" as Engine
+control "State Finalizer" as Finalizer <<control>>
+entity "Execution History" as History <<entity>>
+entity "Workflow Instance" as Instance <<entity>>
+
+Engine -- Finalizer : 1. Signal end of execution
+Finalizer -- Instance : 2. Update status (Success/Fail)
+Finalizer -- History : 3. Write final execution logs
+History -- Finalizer : 4. Acknowledge write
+Finalizer -- Engine : 5. Cleanup instance resources
+@enduml

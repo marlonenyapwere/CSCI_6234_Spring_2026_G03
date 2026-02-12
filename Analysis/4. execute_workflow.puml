@@ -1,0 +1,16 @@
+@startuml
+left to right direction
+actor "Workflow Engine" as Engine
+boundary "Execution Interface" as API <<boundary>>
+control "Execution Controller" as ExecControl <<control>>
+entity "Workflow Instance" as Instance <<entity>>
+entity "Step Logic" as StepLogic <<entity>>
+
+Engine -- API : 1. Trigger execution
+API -- ExecControl : 2. InitializeInstance()
+ExecControl -- Instance : 3. Load state
+ExecControl -- StepLogic : 4. Invoke step logic
+StepLogic -- ExecControl : 5. Return results
+ExecControl -- Instance : 6. Update current step/state
+ExecControl -- API : 7. Report completion
+@enduml

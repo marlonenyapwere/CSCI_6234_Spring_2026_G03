@@ -1,0 +1,17 @@
+@startuml
+left to right direction
+
+actor "Workflow Engine" as Engine
+boundary "State Management API" as API <<boundary>>
+control "State Controller" as Control <<control>>
+entity "Execution State" as State <<entity>>
+entity "Execution History" as History <<entity>>
+
+Engine -- API : 1. Update/Query state
+API -- Control : 2. Process state request
+Control -- State : 3. Update current step/data
+Control -- History : 4. Append audit trail entry
+State -- Control : 5. Return current context
+Control -- API : 6. Acknowledge update
+API -- Engine : 7. Return state confirmation
+@enduml
