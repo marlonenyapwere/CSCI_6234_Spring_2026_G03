@@ -1,0 +1,67 @@
+@startuml
+skinparam style strictuml
+hide empty methods
+
+class Workflow {
+    + workflowId : String
+    + name : String
+    + version : int
+}
+
+abstract class Step {
+    + stepId : String
+    + name : String
+}
+
+class TaskStep {
+    + actionType : String
+}
+
+class DecisionStep {
+    + conditionExpression : String
+}
+
+class Transition {
+    + transitionId : String
+    + condition : String
+}
+
+class WorkflowInstance {
+    + instanceId : String
+    + status : WorkflowStatus
+    + startTime : Date
+}
+
+class StepExecution {
+    + executionId : String
+    + state : String
+    + executedAt : Date
+}
+
+class ExecutionContext {
+    + contextId : String
+    + variables : Map
+}
+
+enum WorkflowStatus {
+    PENDING
+    RUNNING
+    COMPLETED
+    FAILED
+}
+
+' Relationships
+Workflow "1" *-- "*" Step : contains
+Workflow "1" *-- "*" Transition : defines
+Workflow "1" -- "*" WorkflowInstance : instantiated_as
+
+Step <|-- TaskStep : inheritance
+Step <|-- DecisionStep : inheritance
+
+Transition "*" -- "1" Step : source
+Transition "*" -- "1" Step : target
+
+WorkflowInstance "1" *-- "*" StepExecution : tracks
+StepExecution "*" -- "1" Step : references
+WorkflowInstance "1" -- "1" ExecutionContext : maintains
+@enduml
