@@ -1,0 +1,21 @@
+@startuml
+title Activity Diagram: Handle Completion / Failure
+
+' Text Description:
+' 1. The system identifies a signal indicating the workflow should end.
+' 2. The system checks if the termination was caused by a runtime error.
+' 3. If an error exists, the system logs the details and sets the status to FAILED.
+' 4. If no error, the system captures final outputs and sets the status to COMPLETED.
+' 5. The system archives the full execution history and notifies the actor.
+
+start
+:Identify termination signal;
+if (Error detected?) then (yes)
+  :Log error and set status to FAILED;
+else (no)
+  :Capture output and set status to COMPLETED;
+endif
+:Archive Execution History;
+:Notify System Actor;
+stop
+@enduml

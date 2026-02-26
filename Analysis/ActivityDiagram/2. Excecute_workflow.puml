@@ -1,0 +1,23 @@
+@startuml
+title Activity Diagram: Execute Workflow
+
+' Text Description:
+' 1. The Engine receives an execution trigger for a specific workflow.
+' 2. The system fetches the required Workflow Definition.
+' 3. A new Workflow Instance is initialized.
+' 4. The system identifies and starts the initial step.
+' 5. The system enters a loop to process steps and evaluate next paths.
+' 6. Once no more steps remain, the instance status is finalized.
+
+start
+:Receive execution trigger;
+:Fetch Workflow Definition;
+:Initialize Workflow Instance;
+:Identify initial step;
+repeat
+  :Invoke Step Logic;
+  :Determine next step;
+repeat while (Is workflow finished?) is (no)
+:Finalize Instance Status;
+stop
+@enduml

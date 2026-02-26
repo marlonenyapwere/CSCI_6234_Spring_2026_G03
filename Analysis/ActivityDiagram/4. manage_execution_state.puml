@@ -1,0 +1,21 @@
+@startuml
+title Activity Diagram: Manage Execution State
+
+' Text Description:
+' 1. The system captures the latest data from the active execution.
+' 2. The system accesses the specific Workflow Instance record.
+' 3. In parallel, the system updates the variables in the Execution Context and the current step pointer.
+' 4. Simultaneously, a new entry is appended to the Step History.
+' 5. The system commits all state changes to persistent storage.
+
+start
+:Capture execution data;
+:Access Workflow Instance;
+fork
+  :Update Execution Context and Step Pointer;
+fork again
+  :Append Step History entry;
+end fork
+:Commit state changes;
+stop
+@enduml

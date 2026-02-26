@@ -1,0 +1,22 @@
+@startuml
+title Activity Diagram: Extend Workflow Engine
+
+' Text Description:
+' 1. The System Administrator submits a new Step Type component.
+' 2. The system performs a validation check for interface compliance.
+' 3. If the component is compliant, it is registered in the Extension Registry.
+' 4. The engine refreshes its internal component cache to include the new type.
+' 5. If validation fails, an error message is displayed to the Administrator.
+
+start
+:Submit new Step Type component;
+:Validate interface compliance;
+if (Compliant?) then (yes)
+  :Register in Extension Registry;
+  :Refresh component cache;
+  :Display Success;
+else (no)
+  :Display Validation Error;
+endif
+stop
+@enduml

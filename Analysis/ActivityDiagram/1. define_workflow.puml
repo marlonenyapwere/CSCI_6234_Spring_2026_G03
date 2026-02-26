@@ -1,0 +1,21 @@
+@startuml
+title Activity Diagram: Define Workflow
+
+start
+:Request workflow metadata;
+:Enter workflow name and version;
+repeat
+  :Define new step;
+  :Set step attributes;
+  :Define conditional transitions;
+repeat while (More steps to add?)
+:Validate workflow logic;
+if (Valid?) then (yes)
+  :Save Workflow Definition;
+  :Display success message;
+else (no)
+  :Display error and highlight issues;
+  stop
+endif
+stop
+@enduml

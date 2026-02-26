@@ -1,0 +1,16 @@
+@startuml
+title Activity Diagram: Evaluate Conditions
+
+start
+:Identify current step completion;
+:Retrieve transition rules;
+:Fetch runtime variables from context;
+:Evaluate transition expressions;
+if (Condition Met?) then (yes)
+  :Select target step;
+else (no)
+  :Identify default transition;
+endif
+:Return next step ID;
+stop
+@enduml
