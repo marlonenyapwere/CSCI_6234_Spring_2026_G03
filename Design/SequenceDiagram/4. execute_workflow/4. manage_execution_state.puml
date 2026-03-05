@@ -1,0 +1,15 @@
+@startuml
+title Sequence Diagram: Manage Execution State
+skinparam style strictuml
+
+actor "Workflow Engine" as Engine
+control "ExecutionController" as Ctrl
+entity "ExecutionContext" as Context
+entity "StepExecution" as History
+
+Engine -> Ctrl : updateState(data)
+Ctrl -> Context : setVariable(key, value)
+Ctrl -> History ** : create(stepId, status)
+Ctrl -> History : updateState("COMPLETED")
+Ctrl -> Engine : acknowledgePersistence
+@enduml

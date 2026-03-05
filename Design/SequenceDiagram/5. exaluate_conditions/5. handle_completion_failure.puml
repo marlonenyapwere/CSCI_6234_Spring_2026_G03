@@ -1,0 +1,22 @@
+@startuml
+title UC3: Handle Completion / Failure
+
+actor "Workflow Engine" as WE
+entity "WorkflowInstance" as WI
+entity "StepExecution" as SE
+
+WE -> WI : executeStep(step : Step)
+WI -> SE : markCompleted()
+SE --> WI : void
+WI --> WE : void
+
+alt step execution fails
+    WE -> WI : fail()
+    WI -> SE : markFailed()
+    SE --> WI : void
+    WI --> WE : void
+else all steps succeed
+    WE -> WI : complete()
+    WI --> WE : void
+end
+@enduml

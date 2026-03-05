@@ -1,0 +1,22 @@
+@startuml
+title UC5: Evaluate Conditions
+
+actor "Workflow Engine" as WE
+entity "Transition" as T
+entity "ExecutionContext" as EC
+entity "Step" as S
+
+WE -> T : isValid(context : ExecutionContext)
+T -> EC : getVariable(key : String)
+EC --> T : : Object
+T --> WE : : Boolean
+
+alt Boolean = true
+    WE -> S : execute(context : ExecutionContext)
+    S -> EC : getVariable(key : String)
+    EC --> S : : Object
+    S -> EC : setVariable(key : String, value : Object)
+    EC --> S : void
+    S --> WE : void
+end
+@enduml

@@ -1,0 +1,91 @@
+@startuml
+skinparam style strictuml
+
+class Workflow {
+    + workflowId : String
+    + name : String
+    + version : int
+    --
+    + addStep(step : Step) : void
+    + addTransition(transition : Transition) : void
+    + createInstance() : WorkflowInstance
+}
+
+abstract class Step {
+    + stepId : String
+    + name : String
+    --
+    + execute(context : ExecutionContext) : void
+}
+
+class TaskStep {
+    + actionType : String
+    --
+    + execute(context : ExecutionContext) : void
+}
+
+class DecisionStep {
+    + conditionExpression : String
+    --
+    + execute(context : ExecutionContext) : void
+    + evaluate(context : ExecutionContext) : Boolean
+}
+
+class Transition {
+    + transitionId : String
+    + condition : String
+    --
+    + isValid(context : ExecutionContext) : Boolean
+}
+
+class WorkflowInstance {
+    + instanceId : String
+    + status : WorkflowStatus
+    + startTime : Date
+    --
+    + start() : void
+    + executeStep(step : Step) : void
+    + complete() : void
+    + fail() : void
+}
+
+class StepExecution {
+    + executionId : String
+    + state : String
+    + executedAt : Date
+    --
+    + markCompleted() : void
+    + markFailed() : void
+}
+
+class ExecutionContext {
+    + contextId : String
+    + variables : Map
+    --
+    + setVariable(key : String, value : Object) : void
+    + getVariable(key : String) : Object
+}
+
+enum WorkflowStatus {
+    PENDING
+    RUNNING
+    COMPLETED
+    FAILED
+}
+
+' Relationships
+Workflow "1" *-- "*" Step : contains
+Workflow "1" *-- "*" Transition : defines
+Workflow "1" -- "*" WorkflowInstance : instantiated_as
+
+Step <|-- TaskStep
+Step <|-- DecisionStep
+
+Transition "*" -- "1" Step : source
+Transition "*" -- "1" Step : target
+
+WorkflowInstance "1" *-- "*" StepExecution : tracks
+StepExecution "*" -- "1" Step : references
+WorkflowInstance "1" -- "1" ExecutionContext : maintains
+
+@enduml

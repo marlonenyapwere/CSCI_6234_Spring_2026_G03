@@ -1,0 +1,27 @@
+@startuml
+title UC4: Execute Workflow
+
+actor "Workflow Engine" as WE
+entity "Workflow" as W
+entity "WorkflowInstance" as WI
+entity "Step" as S
+entity "Transition" as T
+entity "ExecutionContext" as EC
+
+WE -> W : createInstance()
+W --> WE : : WorkflowInstance
+WE -> WI : start()
+WI --> WE : void
+WE -> WI : executeStep(step : Step)
+WI -> S : execute(context : ExecutionContext)
+S -> EC : getVariable(key : String)
+EC --> S : : Object
+S -> EC : setVariable(key : String, value : Object)
+EC --> S : void
+S --> WI : void
+WI -> T : isValid(context : ExecutionContext)
+T --> WI : : Boolean
+WI --> WE : void
+WE -> WI : complete()
+WI --> WE : void
+@enduml

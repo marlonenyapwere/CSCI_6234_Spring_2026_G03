@@ -1,0 +1,24 @@
+@startuml
+title UC6: Extend Workflow Engine
+
+actor "System Administrator" as SA
+entity "TaskStep" as TS
+entity "DecisionStep" as DS
+entity "ExecutionContext" as EC
+
+SA -> TS ** : new TaskStep(stepId, name, actionType)
+SA -> TS : execute(context : ExecutionContext)
+TS -> EC : getVariable(key : String)
+EC --> TS : : Object
+TS -> EC : setVariable(key : String, value : Object)
+EC --> TS : void
+TS --> SA : void
+
+SA -> DS ** : new DecisionStep(stepId, name, conditionExpression)
+SA -> DS : evaluate(context : ExecutionContext)
+DS -> EC : getVariable(key : String)
+EC --> DS : : Object
+DS --> SA : : Boolean
+SA -> DS : execute(context : ExecutionContext)
+DS --> SA : void
+@enduml

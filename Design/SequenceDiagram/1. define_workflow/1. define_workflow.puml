@@ -1,0 +1,17 @@
+@startuml
+title UC1: Define Workflow
+
+actor "Workflow Designer" as WD
+entity "Workflow" as W
+entity "Step" as S
+entity "Transition" as T
+entity "WorkflowInstance" as WI
+
+WD -> W : addStep(step : Step)
+W --> WD : void
+WD -> W : addTransition(transition : Transition)
+W --> WD : void
+WD -> W : createInstance()
+W -> WI ** : new WorkflowInstance
+W --> WD : : WorkflowInstance
+@enduml
