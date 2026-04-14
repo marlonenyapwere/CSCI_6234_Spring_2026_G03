@@ -1,6 +1,6 @@
 package flows.api;
 
-import flows.definition.Workflow;
+import flows.definition.WorkflowDefinition;
 import flows.runtime.WorkflowExecutor;
 import flows.runtime.WorkflowInstance;
 import flows.runtime.WorkflowRepository;
@@ -19,13 +19,13 @@ public class WorkflowService {
         this.definitionRepository = definitionRepository;
     }
 
-    public Workflow saveDefinition(Workflow definition) {
+    public WorkflowDefinition saveDefinition(WorkflowDefinition definition) {
         definitionRepository.save(definition);
         return definitionRepository.get(definition.id);
     }
 
     public WorkflowInstance startWorkflow(String definitionId, Map<String, Object> data) {
-        Workflow def = definitionRepository.get(definitionId);
+        WorkflowDefinition def = definitionRepository.get(definitionId);
         if (def == null) {
             throw new RuntimeException("Definition not found: " + definitionId);
         }
@@ -59,7 +59,7 @@ public class WorkflowService {
             throw new RuntimeException("Workflow instance not found: " + workflowId);
         }
 
-        Workflow def = definitionRepository.get(instance.definitionId);
+        WorkflowDefinition def = definitionRepository.get(instance.definitionId);
         if (def == null) {
             throw new RuntimeException("Definition not found: " + instance.definitionId);
         }

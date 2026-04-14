@@ -1,6 +1,6 @@
 package flows.api;
 
-import flows.definition.Workflow;
+import flows.definition.WorkflowDefinition;
 import org.springframework.stereotype.Component;
 
 import flows.persistence.WorkflowJsonMapper;
@@ -21,7 +21,7 @@ public class WorkflowDefinitionRepository {
         this.jsonMapper = jsonMapper;
     }
 
-    public void save(Workflow definition) {
+    public void save(WorkflowDefinition definition) {
         definition.buildStepMap();
 
         WorkflowDefinitionEntity entity = new WorkflowDefinitionEntity();
@@ -34,7 +34,7 @@ public class WorkflowDefinitionRepository {
         jpaRepository.save(entity);
     }
 
-    public Workflow get(String id) {
+    public WorkflowDefinition get(String id) {
         WorkflowDefinitionEntity entity = jpaRepository.findById(id)
                 .orElse(null);
 
@@ -42,7 +42,7 @@ public class WorkflowDefinitionRepository {
             return null;
         }
 
-        Workflow definition = jsonMapper.fromJson(entity.definitionJson, Workflow.class);
+        WorkflowDefinition definition = jsonMapper.fromJson(entity.definitionJson, WorkflowDefinition.class);
         definition.buildStepMap();
         return definition;
     }

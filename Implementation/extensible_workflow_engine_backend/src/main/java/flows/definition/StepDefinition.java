@@ -5,23 +5,28 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Step {
+public class StepDefinition {
 
     public String id;
     public String type;
     public String nextStepId;
 
-    public List<Step> steps;
+    public List<StepDefinition> steps;
 
     public Integer times;
-    public Step step;
+    public StepDefinition step;
 
-    public Step initial;
+    public StepDefinition initial;
     public String condition;
-    public Step onSuccess;
-    public Step onFailure;
+    public StepDefinition onSuccess;
+    public StepDefinition onFailure;
 
     public String message;
+
+    @JsonIgnore
+    public String parentStepId;
 }

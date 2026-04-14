@@ -1,8 +1,8 @@
 package flows.registry;
 
-import flows.definition.Step;
+import flows.definition.StepDefinition;
 import flows.work.Work;
 
 public interface StepHandlerFactory {
-    Work create(Step def);
+    Work create(StepDefinition def);
 }

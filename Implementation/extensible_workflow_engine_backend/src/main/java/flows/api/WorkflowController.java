@@ -1,6 +1,6 @@
 package flows.api;
 
-import flows.definition.Workflow;
+import flows.definition.WorkflowDefinition;
 import flows.runtime.WorkflowInstance;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ public class WorkflowController {
     }
 
     @PostMapping("/definition")
-    public Workflow createDefinition(@RequestBody Workflow definition) {
+    public WorkflowDefinition createDefinition(@RequestBody WorkflowDefinition definition) {
         return workflowService.saveDefinition(definition);
     }
 

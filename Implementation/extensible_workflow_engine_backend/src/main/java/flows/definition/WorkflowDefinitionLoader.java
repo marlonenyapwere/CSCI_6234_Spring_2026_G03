@@ -8,9 +8,9 @@ public class WorkflowDefinitionLoader {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    public static Workflow load(String path) {
+    public static WorkflowDefinition load(String path) {
         try {
-            Workflow def = mapper.readValue(new File(path), Workflow.class);
+            WorkflowDefinition def = mapper.readValue(new File(path), WorkflowDefinition.class);
             def.buildStepMap();
 
             System.out.println("Loaded steps: " + def.stepMap.keySet());
