@@ -1,0 +1,22 @@
+{
+  "id": "approvalFlow",
+  "root": {
+    "id": "step1",
+    "type": "TASK",
+    "message": "Start workflow",
+    "nextStepId": "step2"
+  },
+  "steps": [
+    {
+      "id": "step2",
+      "type": "USER_TASK",
+      "message": "Approve request?",
+      "nextStepId": "step3"
+    },
+    {
+      "id": "step3",
+      "type": "TASK",
+      "message": "Approved"
+    }
+  ]
+}
