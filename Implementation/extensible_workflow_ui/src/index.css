@@ -1,0 +1,24 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:      #f7f7f8;
+  --panel:   #ffffff;
+  --border:  #e5e7eb;
+  --text:    #111827;
+  --text2:   #6b7280;
+  --accent:  #2563eb;
+  --success: #16a34a;
+  --error:   #dc2626;
+
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+}
+
+html, body, #root { height: 100%; overflow: hidden; background: var(--bg); color: var(--text); }
+
+/* ReactFlow */
+.react-flow__attribution { display: none; }
+.react-flow__background  { background: var(--bg) !important; }
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
