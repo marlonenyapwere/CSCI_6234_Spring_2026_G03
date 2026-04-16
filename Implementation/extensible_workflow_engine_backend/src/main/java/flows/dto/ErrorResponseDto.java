@@ -1,4 +1,4 @@
-package flows.api.dto;
+package flows.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
