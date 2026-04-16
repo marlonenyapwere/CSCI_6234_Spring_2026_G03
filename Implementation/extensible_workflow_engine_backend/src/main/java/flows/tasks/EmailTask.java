@@ -37,18 +37,23 @@ public class EmailTask implements Work {
     public WorkReport execute(WorkContext context) {
         try {
             SimpleMailMessage message = new SimpleMailMessage();
+
             if (from != null && !from.isBlank()) {
                 message.setFrom(from);
             }
+
             message.setTo(to);
             message.setSubject(subject);
             message.setText(body);
 
             mailSender.send(message);
 
-            System.out.println("Email sent to " + to);
+            System.out.println("Email sent successfully to " + to);
             return new DefaultWorkReport(WorkStatus.COMPLETED, context);
+
         } catch (Exception e) {
+            System.out.println("Email send failed: " + e.getClass().getName() + " - " + e.getMessage());
+            e.printStackTrace();
             return new DefaultWorkReport(WorkStatus.FAILED, context, e);
         }
     }
