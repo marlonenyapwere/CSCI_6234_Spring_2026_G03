@@ -2,7 +2,6 @@ package flows.persistence;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
@@ -31,8 +30,7 @@ public class WorkflowInstanceEntity {
     @Column(name = "waiting_step_id")
     public String waitingStepId;
 
-    @Lob
-    @Column(name = "data_json", columnDefinition = "CLOB")
+    @Column(name = "data_json", columnDefinition = "TEXT")
     public String dataJson;
 
     @Column(name = "start_time")
