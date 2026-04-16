@@ -7,6 +7,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.util.Map;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StepDefinition {
@@ -26,6 +28,18 @@ public class StepDefinition {
     public StepDefinition onFailure;
 
     public String message;
+
+    // EMAIL task fields
+    public String to;
+    public String subject;
+    public String body;
+    public String from;
+
+    // HTTP task fields
+    public String url;
+    public String method;
+    public Map<String, String> headers;
+    public String requestBody;
 
     @JsonIgnore
     public String parentStepId;

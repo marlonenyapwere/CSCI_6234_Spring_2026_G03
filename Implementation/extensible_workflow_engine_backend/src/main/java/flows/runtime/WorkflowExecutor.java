@@ -134,6 +134,8 @@ public class WorkflowExecutor {
 
             case "TASK":
             case "USER_TASK":
+            case "HTTP":
+            case "EMAIL":
                 return resolveAfterTask(step, def);
 
             case "CONDITIONAL":
